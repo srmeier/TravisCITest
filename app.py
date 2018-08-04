@@ -1,22 +1,23 @@
 from flask import Flask
 
-app = Flask(__name__)
 
+def create_app():
+    app = Flask(__name__)
 
-@app.route('/add/a=<a>&b=<b>')
-def add(a, b):
-    return str(float(a) + float(b))
+    @app.route('/add/a=<a>&b=<b>')
+    def add(a, b):
+        return str(float(a) + float(b))
 
+    @app.route('/sub/a=<a>&b=<b>')
+    def sub(a, b):
+        return str(float(a) - float(b))
 
-@app.route('/sub/a=<a>&b=<b>')
-def add(a, b):
-    return str(float(a) - float(b))
+    @app.route('/')
+    def hello_world():
+        return 'Hello World!'
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+    return app
 
 
 if __name__ == '__main__':
-    app.run()
+    create_app().run()
